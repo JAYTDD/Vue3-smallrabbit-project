@@ -1,6 +1,6 @@
 import http from "@/utils/http";
 
-export function gerCategoryAPI() {
+export function getCategoryAPI() {
   return http({
     url: "/home/category/head",
   });

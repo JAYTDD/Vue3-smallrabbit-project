@@ -9,12 +9,8 @@ const http = axios.create({
 
 // 请求拦截器
 http.interceptors.request.use(
-  (config) => {
-    // 在发送请求之前可以进行一些处理，例如添加认证信息
-    // config.headers.Authorization = 'Bearer ' + token
-    return config
-  },
-  (e) => Promise.reject(e)   
+  (config) => config,
+  (e) => Promise.reject(e)
 )
 
 // 响应拦截器
@@ -23,6 +19,6 @@ http.interceptors.response.use(
     return response.data
   },
   (e) => Promise.reject(e)
-)   
+)
 
 export default http

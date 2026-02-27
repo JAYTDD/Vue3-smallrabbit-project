@@ -1,9 +1,14 @@
 import http from "@/utils/http";
 
 // 获取首页轮播图数据
-export function getBannerAPI() {
+export function getBannerAPI(params = {}) {
+  //默认为1 商品为2
+  const { distributionSite = 1 } = params
   return http({
-    url: '/home/banner'
+    url: '/home/banner',
+    params: {
+      distributionSite
+    }
   });
 }
 
@@ -18,5 +23,12 @@ export function getNewAPI() {
 export function getHotAPI() {
     return http({
         url: '/home/hot'
+  });
+}
+
+// 获取产品列表数据
+export function getGoodsAPI() {
+    return http({
+        url: '/home/goods'
   });
 }

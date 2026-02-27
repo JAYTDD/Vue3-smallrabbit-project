@@ -5,20 +5,19 @@ import LayoutHeader from "./components/LayoutHeader.vue";
 import LayoutNav from "./components/LayoutNav.vue";
 
 // 触发获取导航列表的接口
-import { useCategoryStore } from '@/stores/category'
+import { useCategoryStore } from "@/stores/category";
 import { onMounted } from "vue";
-const categoryStore = useCategoryStore()
+const categoryStore = useCategoryStore();
 onMounted(() => {
-  categoryStore.getCategory()
-})
-
+  categoryStore.getCategory();
+});
 </script>
 
 <template>
   <LayoutFixed />
   <LayoutNav />
   <LayoutHeader />
-  <router-view />
+  <router-view :key="$route.fullPath" />
   <LayoutFooter />
 </template>
 

@@ -1,6 +1,4 @@
 <script setup>
-import { gerCategoryAPI } from '@/apis/layout'
-import { onMounted, ref } from 'vue'
 import { useCategoryStore } from '@/stores/category'
 
 // 使用pinia获取分类列表
@@ -16,10 +14,10 @@ const categoryStore = useCategoryStore()
       </h1>
       <ul class="app-header-nav">
         <li class="home">
-          <RouterLink to="/">首页</RouterLink>
+          <RouterLink  to="/">首页</RouterLink>
         </li>
         <li v-for="item in categoryStore.CategoryList" :key="item.id">
-          <RouterLink to="/">{{ item.name }}</RouterLink>
+          <RouterLink active-class="active" :to="`/category/${item.id}`">{{ item.name }}</RouterLink>
         </li>
       </ul>
       <div class="search">
