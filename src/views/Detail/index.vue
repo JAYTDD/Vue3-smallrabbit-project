@@ -3,18 +3,24 @@ import { ref,onMounted } from "vue";
 import { getDetail } from "@/apis/detail";
 import { useRoute } from "vue-router";
 import DetailHot from "./components/DetailHot.vue";
-
 const detail = ref({})
 const route = useRoute()
 const getGoods = async () => {
   const res = await getDetail(route.params.id)
+  console.log(res);
+
   detail.value = res.result
-  console.log(detail.brand);
 }
 
 onMounted(() => {
   getGoods()
 })
+
+//sku组件的change事件回调
+const skuChange = (sku) => {
+  console.log(sku);
+}
+
 </script>
 
 <template>
@@ -30,13 +36,14 @@ onMounted(() => {
           <el-breadcrumb-item>抓绒保暖，毛毛虫子儿童运动鞋</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
+
       <!-- 商品信息 -->
       <div class="info-container">
         <div>
           <div class="goods-info">
             <div class="media">
               <!-- 图片预览区 -->
-
+              <ImageView :imageList = "detail.mainPictures"/>
               <!-- 统计数量 -->
               <ul class="goods-sales">
                 <li>
@@ -85,7 +92,7 @@ onMounted(() => {
                 </dl>
               </div>
               <!-- sku组件 -->
-
+              <XtxSku :goods="detail" @change="skuChange"/>
               <!-- 数据组件 -->
 
               <!-- 按钮组件 -->
@@ -119,8 +126,8 @@ onMounted(() => {
             </div>
             <!-- 24热榜+专题推荐 -->
             <div class="goods-aside">
-              <DetailHot />
-              <DetailHot />
+              <DetailHot :hotType="1" />
+              <DetailHot :hotType="2" />
             </div>
           </div>
         </div>

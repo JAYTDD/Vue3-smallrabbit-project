@@ -1,5 +1,7 @@
 //axios 基础的封装
 import axios from 'axios'
+import { ElMessage } from 'element-plus'
+import 'element-plus/theme-chalk/el-message.css';
 
 // 创建一个axios实例
 const http = axios.create({
@@ -18,7 +20,14 @@ http.interceptors.response.use(
   (response) => {
     return response.data
   },
-  (e) => Promise.reject(e)
+  (e) => {
+    // 可以在这里统一处理错误
+    ElMessage.error({
+      type: 'warning',
+      message: e.response.data.msg,
+    });
+    return Promise.reject(e)
+  }
 )
 
 export default http
