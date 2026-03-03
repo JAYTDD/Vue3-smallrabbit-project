@@ -1,15 +1,16 @@
 <script setup>
 // 表单校验功能
-import { loginAPI } from "@/apis/user";
 import { ref } from "vue";
 import { ElMessage } from "element-plus";
 import 'element-plus/theme-chalk/el-message.css';
 import { useRouter } from "vue-router";
+import { useUserStore } from "@/stores/user";
 
+const userStore = useUserStore();
 // 准备表单对象
 const form = ref({
-  accout: "",
-  password: "",
+  accout: "xiaotuxian001",
+  password: "123456",
   agree: true,
 });
 
@@ -40,19 +41,15 @@ const doLogin = () => {
 
   formRef.value.validate(async (valid) => {
     if (valid) {
-      // 校验成功
-      console.log("校验成功");
       // 调用登录接口
-      const res = await loginAPI({ account: form.value.accout, password: form.value.password });
+      userStore.getUserInfo(form.value.accout, form.value.password);
       // 提示用户登录成功
       ElMessage.success("登录成功");
       // 跳转到首页
       router.push("/");
     } else {
-      // 校验失败
-      console.log("校验失败");
       // 提示用户登录失败
-
+      ElMessage.error("登录失败，请检查输入的账户和密码");
     }
   });
 };
