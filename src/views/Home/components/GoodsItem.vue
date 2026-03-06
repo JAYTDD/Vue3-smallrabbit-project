@@ -2,9 +2,9 @@
 import { defineProps } from "vue";
 defineProps({
   goods: {
-    type: Object,
-    default: () => {},
-  },
+    type: Array,
+    default: () => [],
+  }
 });
 </script>
 
